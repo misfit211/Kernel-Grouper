@@ -1185,8 +1185,9 @@ restart:
 			if (status >= 0) {
 				list_for_each_entry(lock, &state->lock_states, ls_locks) {
 					if (!(lock->ls_flags & NFS_LOCK_INITIALIZED))
-						printk("%s: Lock reclaim failed!\n",
-							__func__);
+						pr_warn_ratelimited("NFS: "
+							"%s: Lock reclaim "
+							"failed!\n", __func__);
 				}
 				nfs4_put_open_state(state);
 				goto restart;
