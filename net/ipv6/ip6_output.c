@@ -1410,8 +1410,9 @@ alloc_new_skb:
 			 */
 			skb->ip_summed = csummode;
 			skb->csum = 0;
-			/* reserve for fragmentation */
-			skb_reserve(skb, hh_len+sizeof(struct frag_hdr));
+			/* reserve for fragmentation and ipsec header */
+			skb_reserve(skb, hh_len + sizeof(struct frag_hdr) +
+				    dst_exthdrlen);
 
 			if (sk->sk_type == SOCK_DGRAM)
 				skb_shinfo(skb)->tx_flags = tx_flags;
