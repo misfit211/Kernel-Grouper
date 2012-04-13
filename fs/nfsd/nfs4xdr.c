@@ -3262,7 +3262,7 @@ nfsd4_encode_test_stateid(struct nfsd4_compoundres *resp, int nfserr,
 		nfsd4_decode_stateid(argp, &si);
 		valid = nfs4_validate_stateid(&si, test_stateid->ts_has_session);
 		RESERVE_SPACE(4);
-		*p++ = htonl(valid);
+		*p++ = valid;
 		resp->p = p;
 	}
 	nfs4_unlock_state();
