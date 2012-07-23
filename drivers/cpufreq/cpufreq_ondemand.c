@@ -37,8 +37,6 @@
 #define MICRO_FREQUENCY_MIN_SAMPLE_RATE		(10000)
 #define MIN_FREQUENCY_UP_THRESHOLD		(11)
 #define MAX_FREQUENCY_UP_THRESHOLD		(100)
-#define CONFIG_CPU_FREQ_MIN_TICKS		(10)
-#define CONFIG_CPU_FREQ_SAMPLING_LATENCY_MULTIPLIER	(1000)
 
 /*
  * The polling frequency of this governor depends on the capability of

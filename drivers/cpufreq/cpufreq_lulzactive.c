@@ -42,8 +42,6 @@
 #define LOGI(fmt...) printk(KERN_INFO "[lulzactive] " fmt)
 #define LOGW(fmt...) printk(KERN_WARNING "[lulzactive] " fmt)
 #define LOGD(fmt...) printk(KERN_DEBUG "[lulzactive] " fmt)
-#define CONFIG_CPU_FREQ_MIN_TICKS			(10)
-#define CONFIG_CPU_FREQ_SAMPLING_LATENCY_MULTIPLIER	(1000)
 
 static void (*pm_idle_old)(void);
 static atomic_t active_count = ATOMIC_INIT(0);

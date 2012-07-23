@@ -12,6 +12,10 @@
  * published by the Free Software Foundation.
  */
 
+#include <linux/cpu.h>
+#include <linux/cpumask.h>
+#include <linux/sched.h>
+#include <linux/tick.h>
 #include <linux/kernel.h>
 #include <linux/module.h>
 #include <linux/smp.h>
@@ -42,8 +46,6 @@
 #define FREQ_SLEEP_MAX 						(500000)
 #define FREQ_AWAKE_MIN 						(100000)
 #define FREQ_STEP_UP_SLEEP_PERCENT				(15)
-#define CONFIG_CPU_FREQ_MIN_TICKS				(10)
-#define CONFIG_CPU_FREQ_SAMPLING_LATENCY_MULTIPLIER		(1000)
 
 /*
  * The polling frequency of this governor depends on the capability of

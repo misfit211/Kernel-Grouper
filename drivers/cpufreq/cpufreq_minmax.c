@@ -61,8 +61,7 @@ static unsigned int def_sampling_rate;
 #define DEF_SAMPLING_DOWN_FACTOR                (10)
 #define MAX_SAMPLING_DOWN_FACTOR                (100)
 #define TRANSITION_LATENCY_LIMIT                (10 * 1000 * 1000)
-#define CONFIG_CPU_FREQ_MIN_TICKS               (10)
-#define CONFIG_CPU_FREQ_SAMPLING_LATENCY_MULTIPLIER    (1000)
+
 static void do_dbs_timer(struct work_struct *work);
 struct cpu_dbs_info_s {
         struct cpufreq_policy *cur_policy;
