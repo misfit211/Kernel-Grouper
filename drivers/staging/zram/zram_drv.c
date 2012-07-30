@@ -589,7 +589,6 @@ fail:
 	return ret;
 }
 
-#if defined(CONFIG_SWAP_FREE_NOTIFY)
 static void zram_slot_free_notify(struct block_device *bdev, unsigned long index)
 {
 	struct zram *zram;
@@ -598,12 +597,9 @@ static void zram_slot_free_notify(struct block_device *bdev, unsigned long index
 	zram_free_page(zram, index);
 	zram_stat64_inc(zram, &zram->stats.notify_free);
 }
-#endif
 
 static const struct block_device_operations zram_devops = {
-#if defined(CONFIG_SWAP_FREE_NOTIFY)
 	.swap_slot_free_notify = zram_slot_free_notify,
-#endif
 	.owner = THIS_MODULE
 };
 
