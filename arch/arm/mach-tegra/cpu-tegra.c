@@ -42,6 +42,7 @@
 #include "clock.h"
 #include "cpu-tegra.h"
 #include "dvfs.h"
+#include "pm.h"
 
 #ifdef CONFIG_TEGRA_MPDECISION
 /* mpdecision notifier */
@@ -478,6 +479,7 @@ int tegra_update_cpu_speed(unsigned long rate)
 {
 	int ret = 0;
 	struct cpufreq_freqs freqs;
+        unsigned long rate_save = rate;
 
 	freqs.old = tegra_getspeed(0);
 	freqs.new = rate;
