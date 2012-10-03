@@ -42,6 +42,7 @@
 #include "clock.h"
 #include "cpu-tegra.h"
 #include "dvfs.h"
+#include "pm.h"
 
 /* tegra throttling and edp governors require frequencies in the table
    to be in ascending order */
@@ -477,6 +478,7 @@ int tegra_update_cpu_speed(unsigned long rate)
 {
 	int ret = 0;
 	struct cpufreq_freqs freqs;
+        unsigned long rate_save = rate;
 
 	freqs.old = tegra_getspeed(0);
 	freqs.new = rate;
