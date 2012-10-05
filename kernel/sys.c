@@ -369,6 +369,7 @@ void kernel_restart(char *cmd)
 	disable_auto_hotplug();
 #endif
 	kernel_restart_prepare(cmd);
+	disable_nonboot_cpus();
 	if (!cmd)
 		printk(KERN_EMERG "Restarting system.\n");
 	else
