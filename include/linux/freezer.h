@@ -50,7 +50,6 @@ extern int thaw_process(struct task_struct *p);
 extern void refrigerator(void);
 extern int freeze_processes(void);
 extern void thaw_processes(void);
-extern void thaw_kernel_threads(void);
 
 static inline int try_to_freeze(void)
 {
@@ -174,7 +173,6 @@ static inline int thaw_process(struct task_struct *p) { return 1; }
 static inline void refrigerator(void) {}
 static inline int freeze_processes(void) { BUG(); return 0; }
 static inline void thaw_processes(void) {}
-static inline void thaw_kernel_threads(void) {}
 
 static inline int try_to_freeze(void) { return 0; }
 
