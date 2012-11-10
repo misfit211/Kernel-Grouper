@@ -43,10 +43,7 @@ EXPORT_SYMBOL(grouper_query_pcba_revision);
 
 unsigned int grouper_query_pmic_id(void)
 {
-	unsigned int value = 0;
-	value = (grouper_pcbid & 0x8) >> 3;
-
-	return value;
+	return grouper_pcbid & 0x8;
 }
 EXPORT_SYMBOL(grouper_query_pmic_id);
 
