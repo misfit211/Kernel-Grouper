@@ -548,7 +548,7 @@ static int __init grouper_fixed_regulator_init(void)
 	struct platform_device **fixed_reg_devs;
 	int nfixreg_devs;
 
-	if (grouper_query_pmic_id())
+	if(grouper_query_pmic_id())
 		return 0;
 	tegra_get_board_info(&board_info);
 
