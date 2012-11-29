@@ -24,12 +24,6 @@
 
 #define CPUFREQ_NAME_LEN 16
 
-#ifdef CONFIG_CMDLINE_OPTIONS
-/* cmdline_khz/gov/maxscroff variables */
-extern uint32_t cmdline_minkhz;
-extern char cmdline_gov[CPUFREQ_NAME_LEN];
-extern int cmdline_gov_cnt;
-#endif
 
 /*********************************************************************
  *                     CPUFREQ NOTIFIER INTERFACE                    *
