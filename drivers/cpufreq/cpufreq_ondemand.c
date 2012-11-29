@@ -22,7 +22,17 @@
 #include <linux/tick.h>
 #include <linux/ktime.h>
 #include <linux/sched.h>
+#include <linux/input.h>
+#include <linux/workqueue.h>
+#include <linux/slab.h>
+#include <linux/syscalls.h>
+#include <linux/highuid.h>
+#ifdef CONFIG_HAS_EARLYSUSPEND
+#include <linux/earlysuspend.h>
+#endif
+#include <linux/clk.h>
 
+#include "../../arch/arm/mach-tegra/clock.h"
 #include "../../arch/arm/mach-tegra/pm.h"
 #include "../../arch/arm/mach-tegra/tegra_pmqos.h"
 
@@ -719,7 +729,6 @@ static int __init cpufreq_gov_dbs_init(void)
 	u64 idle_time;
 	int cpu = get_cpu();
 
-        Touch_poke_attr[0] = tegra_pmqos_boost_freq;
 	idle_time = get_cpu_idle_time_us(cpu, &wall);
 	put_cpu();
 	if (idle_time != -1ULL) {
