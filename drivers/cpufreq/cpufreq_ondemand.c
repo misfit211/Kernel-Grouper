@@ -30,9 +30,7 @@
 #ifdef CONFIG_HAS_EARLYSUSPEND
 #include <linux/earlysuspend.h>
 #endif
-#include <linux/clk.h>
 
-#include "../../arch/arm/mach-tegra/clock.h"
 #include "../../arch/arm/mach-tegra/pm.h"
 #include "../../arch/arm/mach-tegra/tegra_pmqos.h"
 
@@ -85,10 +83,6 @@ static bool cpufreq_governor_screen = true;
 #endif
 
 static unsigned int saved_powersave_bias = 0;
-
-/* lpcpu variables */
-static struct clk *cpu_lp_clk;
-static unsigned int idle_top_freq;
 
 #ifndef CONFIG_CPU_FREQ_DEFAULT_GOV_ONDEMAND
 static
@@ -737,7 +731,7 @@ static void dbs_check_cpu(struct cpu_dbs_info_s *this_dbs_info)
 		dbs_freq_increase(policy, policy->max);
 #else
 		if (counter < 5) {
-                        /* prevent the lpcpu from slowing down the system */
+                        /* avoid the lpcpu from slowing down the system */
                         if (!is_lp_cluster())
                                 counter++;
                         else
@@ -755,9 +749,9 @@ static void dbs_check_cpu(struct cpu_dbs_info_s *this_dbs_info)
                         if (!is_lp_cluster())
                                 dbs_freq_increase(policy, dbs_tuners_ins.two_phase_freq);
                         else if ((cpufreq_governor_screen == true) && (is_lp_cluster()))
-                                dbs_freq_increase(policy, idle_top_freq);
+                                dbs_freq_increase(policy, 475000);
                         else if ((cpufreq_governor_screen == false) && (is_lp_cluster()))
-                                dbs_freq_increase(policy, ((idle_top_freq / 10) * 7));
+                                dbs_freq_increase(policy, 340000);
 		} else {
 			/* busy phase */
 			if (policy->cur < policy->max)
@@ -1186,9 +1180,6 @@ static int __init cpufreq_gov_dbs_init(void)
 	cputime64_t wall;
 	u64 idle_time;
 	int cpu = get_cpu();
-
-        cpu_lp_clk = clk_get_sys(NULL, "cpu_lp");
-        idle_top_freq = clk_get_max_rate(cpu_lp_clk) / 1000;
 
         Touch_poke_attr[0] = tegra_pmqos_boost_freq;
 	idle_time = get_cpu_idle_time_us(cpu, &wall);
